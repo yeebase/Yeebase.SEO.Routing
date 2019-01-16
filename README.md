@@ -1,11 +1,11 @@
 [![Build Status](https://travis-ci.com/yeebase/Yeebase.SEO.Routing.svg?branch=master)](https://travis-ci.com/yeebase/Yeebase.SEO.Routing)
 
 # Yeebase.SEO.Routing
-Package to simply end all Flow and Neos urls with a `/.
+Package to ensure that all links end with a trailing slash, e.g. `example.com/test/` instead of `example.com/test.
 
 ## Configuration
 
-By default, all `neos` URLs are ignored. You can extend the blacklist array with regex as you like.
+By default, all `/neos/` URLs are ignored. You can extend the blacklist array with regex as you like.
 
 ```yaml
 Yeebase:
