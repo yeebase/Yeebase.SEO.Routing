@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Yeebase\SEO\Routing;
 
 /**
@@ -21,20 +24,15 @@ class Router extends \Neos\Flow\Mvc\Routing\Router
 
     /**
      * Resolves the current uri and ensures that a trailing slash is present
-     *
-     * @param ResolveContext $resolveContext
-     * @return UriInterface
      */
     public function resolve(ResolveContext $resolveContext): UriInterface
     {
-        /** @var Uri $uri */
         $uri = parent::resolve($resolveContext);
 
-        if ($this->matchesBlacklist($uri) === false && isset(pathinfo($uri)['extension']) === false) {
-            // $uri needs to be reparsed, because the path often contains the query
-            $parsedUri = new Uri((string)$uri);
-            $parsedUri->setPath(rtrim($parsedUri->getPath(), '/') . '/');
-            return $parsedUri;
+        if ($this->matchesBlacklist($uri) === false && isset(pathinfo((string) $uri)['extension']) === false) {
+            // $uri needs to be re-parsed, because the path often contains the query
+            $parsedUri = new Uri((string) $uri);
+            return $parsedUri->withPath(rtrim($parsedUri->getPath(), '/') . '/');
         }
 
         return $uri;
